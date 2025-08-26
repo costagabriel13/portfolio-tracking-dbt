@@ -1,5 +1,20 @@
 version: 2
 sources:
+    - name: ABC_BANK_POSITION
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ACCOUNTID
+            - SYMBOL
+      columns:
+        - name: CONCAT_WS('-', ACCOUNTID, SYMBOL)
+          tests:
+            - not_null
+            - unique
+        - name: SYMBOL
+          tests:
+            - not_null
+            
     - name: abc_bank
       database: PORTFOLIO_TRACKING
       schema: SOURCE_DATA
